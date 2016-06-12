@@ -5,8 +5,8 @@ var ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
  
 // open connection to a tcp line 
-// client.connectTCP("192.168.2.96:502");
-// client.setID(1);
+client.connectTCP("192.168.2.96");
+client.setID(1);
 
 const options = {
   uri: 'http://buildings.nantum.io/345_Park/sensors?q=eyJzb3VyY2UiOiAicHFfbWV0ZXIifQ==',
@@ -26,7 +26,9 @@ function getDocs(options) {
 
 getDocs(options)
 .then(data => {
-  console.log(data);
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].identifier1 !== '192.168.2.96') console.log('difffff', data[i].identifier1);
+  }
 });
 
 // read the values of 10 registers starting at address 0 
