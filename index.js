@@ -25,14 +25,14 @@ function getDocs(options) {
 
 getDocs(options)
 .then(metaDocs => {
-  console.log(metaDocs[0].identifier1, typeof metaDocs[0].identifier1)
   // open connection to a tcp line 
   // client.connectTCP(metaDocs[0].identifier1);
   // client.setID(1);
   const promises = metaDocs.map(doc => getData(163, 38));
+  console.log('how manyt promuses: ', promises.length)
   return Promise.all(promises);
 })
-.then(data => console.log(data))
+.then(data => console.log('dataaaa', data))
 .catch(err => console.log(err));
 
 
