@@ -4,10 +4,10 @@ const request = require('request-promise');
 const ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
 // open connection to a tcp line 
-function openConnection(IPAddr) {
+// function openConnection(IPAddr) {
   client.connectTCP(IPAddr);
   client.setID(1);
-}
+// }
 
 const options = {
   uri: 'http://buildings.nantum.io/345_Park/sensors?q=eyJzb3VyY2UiOiAicHFfbWV0ZXIifQ==',
@@ -28,13 +28,18 @@ function getDocs(options) {
 getDocs(options)
 .then(metaDocs => {
   // open connection to a tcp line 
-  openConnection(metaDocs[0].identifier1);
+  // openConnection(metaDocs[0].identifier1);
   // client.connectTCP('192.168.2.96');
   // client.setID(1);
-  client.readHoldingRegisters(163, 38, function(err, data) {
+  client.readHoldingRegisters(163, 38)
+  .then((err, data) => {
     if (err) console.log(err);
     else console.log(data.data);
   });
+  // client.readHoldingRegisters(163, 38, function(err, data) {
+  //   if (err) console.log(err);
+  //   else console.log(data.data);
+  // });
   // const promises = metaDocs.map(doc => getData(163, 38));
   // return Promise.all(promises);
 })
