@@ -28,12 +28,15 @@ getDocs(options)
   // open connection to a tcp line 
   // client.connectTCP(metaDocs[0].identifier1);
   // client.setID(1);
-  const promises = metaDocs.map(doc => getData(163, 38));
-  console.log('how manyt promuses: ', promises.length)
-  return Promise.all(promises);
+  client.readHoldingRegisters(registerNum - 1, numRegisters, function(err, data) {
+    if (err) console.log(err);
+    else console.log(data.data);
+  });
+  // const promises = metaDocs.map(doc => getData(163, 38));
+  // return Promise.all(promises);
 })
-.then(data => console.log('dataaaa', data))
-.catch(err => console.log(err));
+// .then(data => console.log('dataaaa', data))
+// .catch(err => console.log('errr', err));
 
 
 
