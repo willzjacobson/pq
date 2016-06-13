@@ -34,7 +34,7 @@ getDocs(options)
   client.readHoldingRegisters(163, 38)
   .then((err, data) => {
     if (err) console.log(err);
-    else console.log(data.data);
+    else console.log(data.data.data);
   });
   // client.readHoldingRegisters(163, 38, function(err, data) {
   //   if (err) console.log(err);
