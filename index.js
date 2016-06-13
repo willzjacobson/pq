@@ -4,8 +4,8 @@ const request = require('request-promise');
 const ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
 // open connection to a tcp line 
-client.connectTCP('192.168.2.96');
-client.setID(1);
+// client.connectTCP('192.168.2.96');
+// client.setID(1);
 
 const options = {
   uri: 'http://buildings.nantum.io/345_Park/sensors?q=eyJzb3VyY2UiOiAicHFfbWV0ZXIifQ==',
@@ -26,8 +26,8 @@ function getDocs(options) {
 getDocs(options)
 .then(metaDocs => {
   // open connection to a tcp line 
-  // client.connectTCP(metaDocs[0].identifier1);
-  // client.setID(1);
+  client.connectTCP(metaDocs[0].identifier1);
+  client.setID(1);
   client.readHoldingRegisters(163, 38, function(err, data) {
     if (err) console.log(err);
     else console.log(data.data);
