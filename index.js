@@ -31,7 +31,7 @@ getDocs(options)
 
 
 function getData(registerNum, numRegisters) {
-  return new Promise((resolve, reject) {
+  return new Promise((resolve, reject) => {
     client.readHoldingRegisters(registerNum - 1, numRegisters, function(err, data) {
         if (err) reject(err);
         else resolve(data.data);
