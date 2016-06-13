@@ -5,7 +5,7 @@ const ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
 // open connection to a tcp line 
 // function openConnection(IPAddr) {
-  client.connectTCP(IPAddr);
+  client.connectTCP('192.168.2.96');
   client.setID(1);
 // }
 
