@@ -26,7 +26,7 @@ function getDocs(options) {
 getDocs(options)
 .then(metaDocs => {
   // open connection to a tcp line 
-  client.connectTCP(metaDocs[0].identifier1);
+  client.connectTCP('192.168.2.96');
   client.setID(1);
   client.readHoldingRegisters(163, 38, function(err, data) {
     if (err) console.log(err);
