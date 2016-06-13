@@ -1,12 +1,7 @@
 const request = require('request-promise');
-
 // create an empty modbus client 
-var ModbusRTU = require("modbus-serial");
+const ModbusRTU = require("modbus-serial");
 var client = new ModbusRTU();
- 
-// open connection to a tcp line 
-client.connectTCP("192.168.2.96");
-client.setID(1);
 
 const options = {
   uri: 'http://buildings.nantum.io/345_Park/sensors?q=eyJzb3VyY2UiOiAicHFfbWV0ZXIifQ==',
@@ -25,18 +20,22 @@ function getDocs(options) {
 }
 
 getDocs(options)
-.then(data => {
-  for (var i = 0; i < data.length; i++) {
-    if (data[i].identifier1 !== '192.168.2.96') console.log('difffff', data[i].identifier1);
-  }
+.then(metaDocs => {
+    // open connection to a tcp line 
+  client.connectTCP(Metadocs[0].identifier1);
+  client.setID(1);
+  const promises = metaDocs.map((doc) => getData(doc));
+  return Promise.all(promises);
 });
 
-// read the values of 10 registers starting at address 0 
-// on device number 1. and log the values to the console. 
-setInterval(function() {
-    client.readHoldingRegisters(173, 38, function(err, data) {
-        if (err) console.log('err: ', err);
-        else console.log('data: ', data.data);
+
+
+function getData(registerNum, numRegisters) {
+  return new Promise((resolve, reject) {
+    client.readHoldingRegisters(registerNum - 1, numRegisters, function(err, data) {
+        if (err) reject(err);
+        else resolve(data.data);
     });
-}, 5000);
+  })
+}
 
