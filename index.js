@@ -32,7 +32,7 @@ getDocs(options)
   // client.connectTCP('192.168.2.96');
   // client.setID(1);
   client.readHoldingRegisters(163, 38)
-  .then((err, data) => {
+  .then((data, err) => {
     if (err) console.log('errrr: ', err);
     else console.log('data: ', data.data);
   });
