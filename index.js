@@ -33,8 +33,8 @@ getDocs(options)
   // client.setID(1);
   client.readHoldingRegisters(163, 38)
   .then((err, data) => {
-    if (err) console.log(err);
-    else console.log(data.data.data);
+    if (err) console.log('errrr: ', err);
+    else console.log('data: ', data.data);
   });
   // client.readHoldingRegisters(163, 38, function(err, data) {
   //   if (err) console.log(err);
