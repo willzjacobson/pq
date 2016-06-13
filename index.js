@@ -28,7 +28,7 @@ getDocs(options)
   // open connection to a tcp line 
   // client.connectTCP(metaDocs[0].identifier1);
   // client.setID(1);
-  client.readHoldingRegisters(registerNum - 1, numRegisters, function(err, data) {
+  client.readHoldingRegisters(163, 38, function(err, data) {
     if (err) console.log(err);
     else console.log(data.data);
   });
